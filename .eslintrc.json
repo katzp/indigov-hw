@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "eslint:recommended", "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "root": true,
+  "ignorePatterns": [
+    "esbuild.config.js",
+    "test/integration/*",
+    "dist/*",
+    "node_modules/*"
+  ],
+  "rules": {
+    "no-case-declarations": "off",
+    "quotes": ["error", "single"],
+    "no-console": "error",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "semi": "error"
+  }
+}
