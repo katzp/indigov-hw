@@ -79,18 +79,18 @@ export class ConstituentController {
         };
 
         try {
-            const [_, fileExists] = await Promise.all([
+            const [_, sameFileTaskExists] = await Promise.all([
                 this.exportTaskRepo.createTask(task),
                 this.exportTaskRepo.getTaskByFileId(task.fileId)
             ]);
-            if (fileExists && fileExists.status !== ExportTaskStatus.FAILED) {
-                if (fileExists.status === ExportTaskStatus.COMPLETE) {
+            if (sameFileTaskExists && sameFileTaskExists.status !== ExportTaskStatus.FAILED) {
+                if (sameFileTaskExists.status === ExportTaskStatus.COMPLETE) {
                     await this.exportTaskRepo.updateTaskStatus(task.id, ExportTaskStatus.COMPLETE);
                 }
             } else {
                 // kickoff job in background
                 // ideally for background tasks we have a queue + workers to process queue message
-                // to separate the compute tasks from our request pipelines
+                // and write file to S3 to separate the compute tasks from our request pipelines
                 this.startExportTask(task);
             }
 

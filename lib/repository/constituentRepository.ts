@@ -13,7 +13,7 @@ export class ConstituentRepository extends BaseRepository<Constituent> {
     }
 
     async listConstituents(limit: number, offset: number): Promise<Constituent[]> {
-        const sql = `SELECT * FROM constituents LIMIT ${limit} OFFSET ${offset}`;
+        const sql = `SELECT * FROM constituents ORDER BY "createdAt" LIMIT ${limit} OFFSET ${offset}`;
         return await this.query(sql, []);
     }
 
